@@ -2,7 +2,6 @@
  * Module dependencies.
  */
 var browserify = require('browserify-middleware');
-
 var express = require('express');
 var routes = require('./routes');
 var user = require('./routes/user');
@@ -12,6 +11,9 @@ var path = require('path');
 
 var app = express();
 
+
+browserify.settings('transform', ['reactify'])
+browserify.settings('extensions', ['.js', '.json', '.jspx'])
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
@@ -42,11 +44,4 @@ io.sockets.on('connection', game.onConnect);
 
 server.listen(app.get('port'), function () {
   console.log('Express server listening on port ' + app.get('port'));
-});
-
-io.sockets.on('connection', function (socket) {
-  socket.emit('news', { hello: 'world' });
-  socket.on('my other event', function (data) {
-    console.log(data);
-  });
 });

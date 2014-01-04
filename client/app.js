@@ -1,3 +1,8 @@
 var test = require('./test');
+var hello = require('./main.jsx');
 
-console.log(test(3))
+var socket = io.connect("/");
+
+socket.on('game', function(data) {
+	console.log(data);
+});
