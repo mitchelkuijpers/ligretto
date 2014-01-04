@@ -46,4 +46,7 @@ exports.build = function (users) {
   _.each(gameState.users, function (user) {
     addUser(gameState, user);
   });
+
+  gameState.board.size.width = Math.ceil(Math.sqrt(20));
+  gameState.board.size.height = Math.floor(Math.sqrt(20));
 };
