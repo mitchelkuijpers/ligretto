@@ -1,0 +1,4 @@
+ligretto
+========
+
+The ligretto game
