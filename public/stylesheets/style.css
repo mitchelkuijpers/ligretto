@@ -20,6 +20,16 @@ a {
   border: 1px solid red;
   width: 1100px;
   padding: 50px;
+  zoom: 1;
+}
+#board:before {
+  content: '';
+  display: block;
+}
+#board:after {
+  content: '';
+  display: table;
+  clear: both;
 }
 #board .tile {
   height: 100px;
@@ -28,8 +38,4 @@ a {
   border-radius: 10px;
   float: left;
   margin: 10px;
-}
-#board:after {
-  content: "";
-  clear: both;
 }

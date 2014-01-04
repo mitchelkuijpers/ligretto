@@ -5,10 +5,6 @@ var Board = require('./components/board.jsx');
 var socket = io.connect("/");
 
 React.renderComponent(
-  Board(),
+  Board({socket: socket}),
   document.getElementById('game')
 );
-
-socket.on('game', function(data) {
-	console.log(data);
-});
