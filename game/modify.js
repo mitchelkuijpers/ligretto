@@ -10,7 +10,7 @@ var updateHand = function (gameState, cardId, userId) {
   }) != null;
   stack.shift();
   var stackIndex = user.stacks.indexOf(stack);
-  if (stackIndex >= 2 && stackIndex <= 4 && user.stacks[0].length > 0) {
+  if (stackIndex >= 1 && stackIndex <= 3 && user.stacks[0].length > 0) {
     user.stacks[stackIndex].push(user.stacks[0].shift());
   }
 };
