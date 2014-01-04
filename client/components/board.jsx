@@ -2,19 +2,18 @@ var React = require('react');
 var Tile = require('./tile.jsx');
 
 module.exports = React.createClass({
-  addTile: function() {
-	var list = this.state.data;
-	list.push([]);
-	this.setState({data: list})
-  },
   componentWillMount: function() {
+  	var that = this;
+  	this.props.socket.on('game', function(data) {
+		that.setState({tiles: data.board.locations})
+	});
   },
   getInitialState: function() {
-    return {data: [1,2,3,4,5]};
+    return {tiles: []};
   },
   render: function() {
-    var tileNodes = this.state.data.map(function (location) {
-      return <Tile index={location} />;
+    var tileNodes = this.state.tiles.map(function (location, index) {
+      return <Tile key={index}/>;
     });
     return (
     	<div id="board">
