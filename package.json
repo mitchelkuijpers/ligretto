@@ -11,6 +11,7 @@
     "less-middleware": "*",
     "socket.io": "~0.9.16",
     "browserify-middleware": "~2.2.0",
-    "reactify": "~0.5.0"
+    "reactify": "~0.5.0",
+    "underscore": "1.5.2"
   }
 }
