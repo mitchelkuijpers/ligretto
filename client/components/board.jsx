@@ -8,10 +8,8 @@ module.exports = React.createClass({
 	this.setState({data: list})
   },
   componentWillMount: function() {
-  	setInterval(this.addTile, 500);
   },
   getInitialState: function() {
-  	
     return {data: [1,2,3,4,5]};
   },
   render: function() {
@@ -19,7 +17,7 @@ module.exports = React.createClass({
       return <Tile index={location} />;
     });
     return (
-    	<div className="board">
+    	<div id="board">
     		{tileNodes}
     	</div>
     );

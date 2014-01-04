@@ -6,7 +6,7 @@ var socket = io.connect("/");
 
 React.renderComponent(
   Board(),
-  document.getElementById('example')
+  document.getElementById('game')
 );
 
 socket.on('game', function(data) {
