@@ -2,6 +2,7 @@
 /**
  * Module dependencies.
  */
+var browserify = require('browserify-middleware');
 
 var express = require('express');
 var routes = require('./routes');
@@ -23,6 +24,8 @@ app.use(express.methodOverride());
 app.use(app.router);
 app.use(require('less-middleware')({ src: path.join(__dirname, 'public') }));
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use('/app.js', browserify('./client/app.js'));
 
 // development only
 if ('development' == app.get('env')) {
