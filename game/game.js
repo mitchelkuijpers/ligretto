@@ -6,9 +6,9 @@ var gameState = {
         ['1a', '1b', '1c', '1d','1e'],
         ['1f'],
         ['1g'],
-        ['1h']
-      ],
-      hand: ['1i', '1j', '1k']
+        ['1h'],
+        ['1i', '1j', '1k']
+      ]
     },
     'user2': {
       name: 'Chicken',
@@ -16,9 +16,9 @@ var gameState = {
         ['2a', '2b', '2c', '2d','2e'],
         ['2f'],
         ['2g'],
-        ['2h']
-      ],
-      hand: ['2i', '2j', '2k']
+        ['2h'],
+        ['2i', '2j', '2k']
+      ]
     },
     'user3': {
       name: 'Apple',
@@ -26,9 +26,9 @@ var gameState = {
         ['3a', '3b', '3c', '3d','3e'],
         ['3f'],
         ['3g'],
-        ['3h']
-      ],
-      hand: ['3i', '3j', '3k']
+        ['3h'],
+        ['3i', '3j', '3k']
+      ]
     },
     'user4': {
       name: 'Cherry',
@@ -36,14 +36,14 @@ var gameState = {
         ['4a', '4b', '4c', '4d','4e'],
         ['4f'],
         ['4g'],
-        ['4h']
-      ],
-      hand: ['4i', '4j', '4k']
+        ['4h'],
+        ['4i', '4j', '4k']
+      ]
     }
   },
   board: {
     size: {width: 4, height: 4},
-    state: [
+    locations: [
       [],[],[],[],
       [],[],[],[],
       [],[],[],[],
@@ -98,13 +98,42 @@ var gameState = {
   }
 };
 
+var verifyUserHasCard = function(userId, cardId) {
+  var user = gameState.users[userId];
+  return _.find(user.stacks, function(stack) { return stack.length > 0 && stack[0] == cardId}) != null;
+};
+
+var verifyPosition = function (locationIndex, cardId) {
+  var location = gameState.board.locations[locationIndex];
+  var lastLocationCardId = (location.length == 0 ? null : location[location.length - 1]);
+
+  var card = gameState.cards[cardId];
+
+  if (lastLocationCardId == null && card.number == 1) {
+    return true
+  } else {
+    var lastLocationCard = gameState.cards[lastLocationCardId];
+    return lastLocationCard.color == card.color && lastLocationCard.number + 1 == card.number;
+  }
+};
+
 exports.onConnect = function (socket) {
   socket.emit('game', gameState);
 
   socket.on('move', function (message) {
     console.log('('+ message.uid + ') Received move "' + message.card + '" from "' + message.user + '" to location "' + message.location + '"');
-    
-    
+
+    var validMove = verifyUserHasCard(message.user, message.card)
+      && verifyPosition(message.location, message.card);
+
+    if (validMove) {
+      //Allow move
+
+      //updatePosition
+      //updateHand
+    } else {
+      //Reject move
+    }
 
     socket.emit('move', message);
   });
