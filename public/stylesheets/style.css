@@ -3,6 +3,9 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   background-color: green;
 }
+.clear {
+  clear: both;
+}
 a {
   color: #00B7FF;
 }
@@ -12,4 +15,17 @@ a {
   background-color: red;
   float: left;
   margin-right: 5px;
+}
+#board {
+  border: 1px solid red;
+  width: 1100px;
+  padding: 50px;
+}
+#board .tile {
+  height: 100px;
+  width: 100px;
+  border: 2px dashed gray;
+  border-radius: 10px;
+  float: left;
+  margin: 10px;
 }
