@@ -1,9 +1,9 @@
-var gameState = {
+exports.game = {
   users: {
     'user1': {
       name: 'Orange',
       stacks: [
-        ['1a', '1b', '1c', '1d','1e'],
+        ['1a', '1b', '1c', '1d', '1e'],
         ['1f'],
         ['1g'],
         ['1h'],
@@ -13,7 +13,7 @@ var gameState = {
     'user2': {
       name: 'Chicken',
       stacks: [
-        ['2a', '2b', '2c', '2d','2e'],
+        ['2a', '2b', '2c', '2d', '2e'],
         ['2f'],
         ['2g'],
         ['2h'],
@@ -23,7 +23,7 @@ var gameState = {
     'user3': {
       name: 'Apple',
       stacks: [
-        ['3a', '3b', '3c', '3d','3e'],
+        ['3a', '3b', '3c', '3d', '3e'],
         ['3f'],
         ['3g'],
         ['3h'],
@@ -33,7 +33,7 @@ var gameState = {
     'user4': {
       name: 'Cherry',
       stacks: [
-        ['4a', '4b', '4c', '4d','4e'],
+        ['4a', '4b', '4c', '4d', '4e'],
         ['4f'],
         ['4g'],
         ['4h'],
@@ -44,10 +44,22 @@ var gameState = {
   board: {
     size: {width: 4, height: 4},
     locations: [
-      [],[],[],[],
-      [],[],[],[],
-      [],[],[],[],
-      [],[],[],[]
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      [],
+      []
     ]
   },
   cards: {
@@ -97,45 +109,3 @@ var gameState = {
     '4k': {user: 'user4', color: 'yellow', number: 3}
   }
 };
-
-var verifyUserHasCard = function(userId, cardId) {
-  var user = gameState.users[userId];
-  return _.find(user.stacks, function(stack) { return stack.length > 0 && stack[0] == cardId}) != null;
-};
-
-var verifyPosition = function (locationIndex, cardId) {
-  var location = gameState.board.locations[locationIndex];
-  var lastLocationCardId = (location.length == 0 ? null : location[location.length - 1]);
-
-  var card = gameState.cards[cardId];
-
-  if (lastLocationCardId == null && card.number == 1) {
-    return true
-  } else {
-    var lastLocationCard = gameState.cards[lastLocationCardId];
-    return lastLocationCard.color == card.color && lastLocationCard.number + 1 == card.number;
-  }
-};
-
-exports.onConnect = function (socket) {
-  socket.emit('game', gameState);
-
-  socket.on('move', function (message) {
-    console.log('('+ message.uid + ') Received move "' + message.card + '" from "' + message.user + '" to location "' + message.location + '"');
-
-    var validMove = verifyUserHasCard(message.user, message.card)
-      && verifyPosition(message.location, message.card);
-
-    if (validMove) {
-      //Allow move
-
-      //updatePosition
-      //updateHand
-    } else {
-      //Reject move
-    }
-
-    socket.emit('move', message);
-  });
-};
-

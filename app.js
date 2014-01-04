@@ -6,7 +6,7 @@ var browserify = require('browserify-middleware');
 var express = require('express');
 var routes = require('./routes');
 var user = require('./routes/user');
-var game = require('./game/game');
+var game = require('./game/server');
 var http = require('http');
 var path = require('path');
 
