@@ -1,12 +1,12 @@
 var test = require('./test');
 var React = require('react');
-var Card = require('./components/card.jsx');
+var Board = require('./components/board.jsx');
 
 var socket = io.connect("/");
 
 React.renderComponent(
-  Card(),
-  document.getElementById('example')
+  Board(),
+  document.getElementById('game')
 );
 
 socket.on('game', function(data) {
