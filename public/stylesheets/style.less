@@ -7,7 +7,7 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background-color: green;
+  background-color: #efefef;
 }
 
 .clear{
@@ -19,11 +19,62 @@ a {
 }
 
 .card{
+	cursor: move;
 	height: 100px;
 	width: 70px;
-	background-color: red;
+	
 	float: left;
 	margin-right: 5px;
+	
+	&.red {
+			background-color: red;
+	}
+	
+	&.blue {
+			background-color: blue;
+	}
+	
+	&.green {
+			background-color: green;
+	}
+	
+	&.yellow {
+			background-color: yellow;
+	}
+	
+	&.orange {
+			background-color: orange;
+	}
+}
+
+.stacks {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	
+	li {
+		display: inline-block;
+		padding: 0;
+		margin: 0;
+		margin-left: 10px;
+	}
+}
+
+.stack {
+	position: relative;
+	display: inline-block;
+	height: 100px;
+	width: 70px;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	
+	li {
+		margin: 0;
+		padding: 0;
+		position: absolute;
+		left: 0;
+	}
 }
 
 #board{
