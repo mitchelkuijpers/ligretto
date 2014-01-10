@@ -1,3 +1,5 @@
+"use strict";
+
 var React = require('react');
 
 module.exports = React.createClass({
@@ -6,10 +8,13 @@ module.exports = React.createClass({
     id: React.PropTypes.string.isRequired
   },
   handleDragStart: function(event) {
-	  event.target.style.opacity = 0;  	
+	event.target.style.opacity = 1;
+	var dataTransfer = event.nativeEvent.dataTransfer;
+        dataTransfer.effectAllowed = 'move';
+	dataTransfer.setData('text/plain', this.props.id);	
   },
   handleDragEnd: function(event) {
-	  event.target.style.opacity = 1;  	
+	event.target.style.opacity = 1;  	
   },
   render: function() {
     return (
