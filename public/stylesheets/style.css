@@ -15,6 +15,10 @@ a {
   width: 70px;
   float: left;
   margin-right: 5px;
+  text-align: center;
+  color: #fff;
+  font-size: 30px;
+  line-height: 100px;
 }
 .card.red {
   background-color: red;
@@ -26,7 +30,7 @@ a {
   background-color: green;
 }
 .card.yellow {
-  background-color: yellow;
+  background-color: orange;
 }
 .card.orange {
   background-color: orange;

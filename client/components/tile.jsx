@@ -7,10 +7,12 @@ module.exports = React.createClass({
   },
 
   handleDrop: function(event) {
-	  event.preventDefault();
-	  var cardId = event.nativeEvent.dataTransfer.getData('text/plain');
-	  console.log(cardId);
-  },
+	var dataTransfer = event.nativeEvent.dataTransfer;
+	var cardId = dataTransfer.getData('text/plain');
+	console.log(cardId);
+	dataTransfer.dropEffect = "move";
+	event.preventDefault();
+  }, 
 
   render: function() {
     return (
