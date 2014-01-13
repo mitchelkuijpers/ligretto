@@ -9,8 +9,11 @@ module.exports = React.createClass({
   render: function() {
 	var cards = this.props.cards;
     var cardNodes = this.props.stack.map(function (location) {
-      return <li><Card card={cards[location]} id={location} /></li>;
-    });
+        this.offset += 2;
+        return (<li style={{top: -this.offset}}>
+                    <Card card={cards[location]} id={location}  />
+                </li>);
+    }, {offset: 0});
     return (
     	<ul className="stack">
     		{cardNodes}
