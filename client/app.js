@@ -1,6 +1,5 @@
-var test = require('./test');
 var React = require('react');
-var Game = require('./components/game.jsx');
+var Game = require('./components/game');
 
 React.renderComponent(
   Game(),

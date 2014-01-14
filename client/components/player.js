@@ -1,5 +1,9 @@
+/**
+ * @jsx React.DOM
+ */
+
 var React = require("react");
-var Stack = require("./stack.jsx");
+var Stack = require("./stack");
 
 module.exports = React.createClass({
     propTypes: {

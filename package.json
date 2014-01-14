@@ -16,5 +16,19 @@
     "react": "~0.8.0",
     "underscore": "1.5.2",
     "mocha": "~1.17.0"
+  },
+  "devDependencies": {
+    "gulp": "*",
+    "gulp-util": "*",
+    "gulp-coffee": "*",
+    "gulp-rename": "*",
+    "gulp-clean": "*",
+    "gulp-csso": "*",
+    "webpack": "~1.0.0-beta6",
+    "react-tools": "~0.8.0",
+    "jsx-loader": "petehunt/jsx-loader",
+    "css-loader": "~0.6.6",
+    "style-loader": "~0.6.0",
+    "less-loader": "~0.6.2"
   }
 }

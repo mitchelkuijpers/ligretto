@@ -1,6 +1,11 @@
+/**
+ * @jsx React.DOM
+ */
+
+require('./game.less');
 var React = require('react');
-var Board = require('./board.jsx');
-var Player = require('./player.jsx');
+var Board = require('./board');
+var Player = require('./player');
 var _ = require('underscore');
 
 

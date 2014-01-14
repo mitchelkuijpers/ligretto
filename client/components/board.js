@@ -1,5 +1,9 @@
+/**
+ * @jsx React.DOM
+ */
+
 var React = require('react');
-var Tile = require('./tile.jsx');
+var Tile = require('./tile');
 
 module.exports = React.createClass({
   propTypes: {
