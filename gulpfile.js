@@ -20,6 +20,7 @@ gulp.task("webpack", function(callback) {
 
 
 gulp.task('watch', function() {
+    gulp.run('webpack');
     gulp.watch('client/**', function(event) {
         gulp.run('webpack');
     });

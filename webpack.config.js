@@ -13,7 +13,6 @@ module.exports = {
             { test: /\.less$/,   loader: "style-loader!css-loader!less-loader" }
         ]
     },
-    debug: true,
     cache: true,
     devtool: 'source-map',
     stats: {
