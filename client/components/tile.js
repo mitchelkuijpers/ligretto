@@ -26,7 +26,7 @@ module.exports = React.createClass({
   render: function() {
     return (
     	<div onDrop={this.handleDrop} onDragOver={this.handleDragOver} className="tile" id={this.props.key}>
-    	    <Stack stack={this.props.stack} cards={this.props.cards} />
+    	    <Stack stack={this.props.stack} cards={this.props.cards} draggable={false} />
     	</div>
     );
   }

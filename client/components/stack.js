@@ -4,6 +4,7 @@
 
 var React = require('react');
 var Card = require('./card');
+var _ = require('underscore');
 
 module.exports = React.createClass({
   propTypes: {
@@ -12,10 +13,11 @@ module.exports = React.createClass({
   },
   render: function() {
 	var cards = this.props.cards;
+    var props = _.defaults(this.props, {draggable: true})
     var cardNodes = this.props.stack.map(function (location) {
         this.offset += 3;
         return (<li style={{top: -this.offset}}>
-                    <Card card={cards[location]} id={location}  />
+                    <Card card={cards[location]} id={location} draggable={props.draggable} />
                 </li>);
     }, {offset: 0});
     return (
