@@ -3,9 +3,8 @@ var webpack = require("webpack");
 module.exports = {
     entry: "./client/app.js",
     output: {
-        path: '/build/',
-        filename: 'bundle.js',
-        publicPath: '/'
+        path: 'build/',
+        filename: 'bundle.js'
     },
     module: {
         loaders: [

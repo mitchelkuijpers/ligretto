@@ -4,7 +4,6 @@ var clean = require('gulp-clean');
 var webpack = require("webpack");
 var tinylr = require('tiny-lr'); // Live reload!
 var webpackConfig = require("./webpack.config.js");
-var WebpackDevServer = require("webpack-dev-server");
 
 var server;
 
@@ -14,10 +13,14 @@ gulp.task("webpack", function(callback) {
 
     // run webpack
     webpack(myConfig, function(err, stats) {
-        if(err) throw new gutil.PluginError("webpack", err);
-        gutil.log("[webpack]", stats.toString({
-            colors: true
-        }));
+        if(err) {
+            throw new gutil.log("[webpack]", err);
+            callback();
+        } else {
+            gutil.log("[webpack]", stats.toString({
+                colors: true
+            }));
+        }
 
         callback();
     });
@@ -40,7 +43,6 @@ gulp.task('watch', function() {
             gutil.log("[livereload]", err);
             return;
         }
-
         gutil.log("[livereload]", 'Listening on port: ' + 35729);
     })
 
