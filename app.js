@@ -25,6 +25,7 @@ app.use(require('less-middleware')({ src: path.join(__dirname, 'public') }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(express.static(__dirname + '/build'));
+app.use(express.static(__dirname + '/node_modules'));
 
 // development only
 if ('development' == app.get('env')) {

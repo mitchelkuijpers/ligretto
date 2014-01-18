@@ -10,6 +10,7 @@ var _ = require('underscore');
 
 
 module.exports = React.createClass({
+
   getInitialState: function() {
     return {
         users: {},
@@ -19,13 +20,15 @@ module.exports = React.createClass({
         }
     };
   },
+
   componentDidMount: function() {
     var that = this;
-    var socket = io.connect("/");
-    socket.on('game', function(data) {
+    this.socket = io.connect("/",  {'force new connection':true} );
+    this.socket.on('game', function(data) {
         that.setState(data);
     });
   },
+
   handleAddCard: function(index, cardId) {
     var newState = this.state;
     var currentStack = newState.board.locations[index]
@@ -43,6 +46,12 @@ module.exports = React.createClass({
 
     this.setState(newState);
   },
+
+  componentWillUnmount: function() {
+      this.socket.disconnect();
+      delete this.socket;
+  },
+
   render: function() {
 	  var playerNodes = [];
 	  var players = this.state.users;

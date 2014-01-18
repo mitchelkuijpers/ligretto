@@ -3,8 +3,9 @@ var webpack = require("webpack");
 module.exports = {
     entry: "./client/app.js",
     output: {
-        path: './build/',
-        filename: "bundle.js"
+        path: '/build/',
+        filename: 'bundle.js',
+        publicPath: '/'
     },
     module: {
         loaders: [
@@ -13,13 +14,8 @@ module.exports = {
             { test: /\.less$/,   loader: "style-loader!css-loader!less-loader" }
         ]
     },
-    cache: true,
-    devtool: 'source-map',
     stats: {
         colors: true,
         reasons: true
     }
-//    plugins: [
-//        new webpack.optimize.UglifyJsPlugin()
-//    ]
 }

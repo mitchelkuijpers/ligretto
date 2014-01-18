@@ -15,7 +15,8 @@
     "envify": "~0.2.0",
     "react": "~0.8.0",
     "underscore": "1.5.2",
-    "mocha": "~1.17.0"
+    "mocha": "~1.17.0",
+    "director": "~1.2.2"
   },
   "devDependencies": {
     "gulp": "*",
@@ -29,6 +30,8 @@
     "jsx-loader": "petehunt/jsx-loader",
     "css-loader": "~0.6.6",
     "style-loader": "~0.6.0",
-    "less-loader": "~0.6.2"
+    "less-loader": "~0.6.2",
+    "tiny-lr": "0.0.5",
+    "webpack-dev-server": "~1.2.0"
   }
 }

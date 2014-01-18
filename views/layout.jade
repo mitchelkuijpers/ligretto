@@ -1,8 +1,11 @@
 doctype
 html
   head
-    title= title
+    meta(charset='utf-8')
+    meta(name='viewport' content='user-scalable=no,initial-scale = 1.0,maximum-scale = 1.0')
+    title=title
     script(src='/socket.io/socket.io.js')
-  body
+    link(rel='stylesheet' href='/topcoat/css/topcoat-mobile-light.min.css' type='text/css')
+  body(class='light')
     block content
     script(src='/bundle.js')
