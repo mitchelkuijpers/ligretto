@@ -1,7 +1,7 @@
 var React = require('react');
 var Game = require('./components/game/game');
-var Director = require('director');
-var GameRoom = require('./components/room/GameRoom');
+var Router = require('./Router');
+var UsernameForm = require('./components/room/UsernameForm');
 
 var mainContainer = document.getElementById('game');
 
@@ -11,7 +11,7 @@ var unmountMain = function() {
 
 var index = function() {
     React.renderComponent(
-        GameRoom(),
+        UsernameForm(),
         mainContainer
     );
 };
@@ -25,10 +25,12 @@ var game = function(gameId) {
 
 var routes = {
     "/" : index,
-    "/game/:gameId": game
+    "/game/:gameId": game,
+    "/game/join/:userName": game,
+    "/game/create/:userName": game
 };
 
-var router = Director.Router(routes);
+var router = Router(routes);
 router.configure({
     before: unmountMain
 });
