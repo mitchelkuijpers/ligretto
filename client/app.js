@@ -3,6 +3,9 @@ var Game = require('./components/game/game');
 var Router = require('./Router');
 var UsernameForm = require('./components/room/UsernameForm');
 
+require("./app.less")
+
+
 var mainContainer = document.getElementById('game');
 
 var unmountMain = function() {

@@ -21,11 +21,8 @@ app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
 app.use(app.router);
-app.use(require('less-middleware')({ src: path.join(__dirname, 'public') }));
-app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(express.static(__dirname + '/build'));
-app.use(express.static(__dirname + '/node_modules'));
+app.use(express.static(__dirname + '/dist'));
 
 // development only
 if ('development' == app.get('env')) {
