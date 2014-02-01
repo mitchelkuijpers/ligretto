@@ -32,30 +32,19 @@ module.exports = React.createClass({
       console.log('JOIN');
       console.log(data);
     });
-    this.socket.on('move', function(data) {
-      console.log('MOVE');
-      console.log(data);
+    this.socket.on('joined', function(user) {
+      console.log('joined!');
+      console.log(user);
+      that.user = user;
     });
-    
-    
+    this.socket.on('change', function(newState) {
+      console.log('change');
+      that.setState(newState);
+    });
   },
 
   handleAddCard: function(index, cardId) {
-    var newState = this.state;
-    var currentStack = newState.board.locations[index]
-    newState.board.locations[index] =  _.flatten([currentStack, cardId]);
-
-    newState.users = _.map(newState.users, function(user) {
-        user.stacks = _.map(user.stacks,
-            function(stack) {
-                return _.without(stack, cardId)
-            });
-            return user;
-        }
-    );
-
-
-    this.setState(newState);
+    this.socket.emit('move', {user: this.user.userId, location: index, card: cardId});
   },
 
   componentWillUnmount: function() {

@@ -1,3 +1,5 @@
+var _ = require('underscore');
+
 var updatePosition = function (gameState, cardId, locationIndex) {
   gameState.board.locations[locationIndex].push(cardId);
 };
@@ -7,7 +9,7 @@ var updateHand = function (gameState, cardId, userId) {
 
   var stack = _.find(user.stacks, function (stack) {
     return stack.length > 0 && stack[0] == cardId
-  }) != null;
+  });
   stack.shift();
   var stackIndex = user.stacks.indexOf(stack);
   if (stackIndex >= 1 && stackIndex <= 3 && user.stacks[0].length > 0) {

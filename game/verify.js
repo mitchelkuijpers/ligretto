@@ -1,3 +1,5 @@
+var _ = require('underscore');
+
 var verifyUserHasCard = function (gameState, userId, cardId) {
   var user = gameState.users[userId];
   return _.find(user.stacks, function (stack) {
@@ -10,12 +12,13 @@ var verifyPosition = function (gameState, locationIndex, cardId) {
   var lastLocationCardId = (location.length == 0 ? null : location[location.length - 1]);
   var card = gameState.cards[cardId];
 
-  if (lastLocationCardId == null && card.number == 1) {
+  if (lastLocationCardId === null && card.number == 1) {
     return true
-  } else {
+  } else if(lastLocationCardId !== null){
     var lastLocationCard = gameState.cards[lastLocationCardId];
     return lastLocationCard.color == card.color && lastLocationCard.number + 1 == card.number;
   }
+  return false;
 };
 
 exports.checkMove = function (gameState, move) {

@@ -15,8 +15,10 @@ exports.onConnect = function (socket) {
   var userId = ((Math.random()*1000000)+1);
   
   _.each(sockets, function(socket) { socket.emit('join', userId)});
+
   users[userId] = { userId: userId, name: 'User ' + userId};
   sockets[userId] = socket;
+  socket.emit('joined', {userId: userId});
 
   socket.on('gameStart', function() {
     if (gameStarted) {
@@ -28,21 +30,20 @@ exports.onConnect = function (socket) {
     _.each(sockets, function(socket){ socket.emit('game', gameState) });
 
     socket.on('move', function (message) {
-      console.log('(' + message.uid + ') Received move "' + message.card + '" from "' + message.user + '" to location "' + message.location + '"');
+      console.log('Received move "' + message.card + '" from "' + message.user + '" to location "' + message.location + '"');
 
-      var validMove = verifyUserHasCard(message.user, message.card)
-        && verifyPosition(gameState, message.location, message.card);
-
+      var validMove = verify.checkMove(gameState, message); 
       if (validMove) {
-        //Allow move
+        console.log('valid move!');
         modify.applyMove(gameState, message);
-        socket.broadcast.emit('move', message);
 
-        if (checkGameOver(message.user)) {
+        _.each(sockets, function(socket) {socket.emit('change', gameState);});
+
+        if (checkGameOver(gameState, message.user)) {
           socket.broadcast.emit('gameOver', {user: message.user});
         }
       } else {
-        socket.broadcast.emit('rejectMove', {uid: message.uid});
+        socket.broadcast.emit('rejectMove', message);
       }
     });
   });
