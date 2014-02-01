@@ -48,7 +48,7 @@ exports.build = function (users) {
     addUser(gameState, user);
   });
 
-  gameState.board.size.width = Math.ceil(Math.sqrt(20));
-  gameState.board.size.height = Math.floor(Math.sqrt(20));
+  gameState.board.size.width = Math.ceil(Math.sqrt(users.length * 4));
+  gameState.board.size.height = Math.floor(Math.sqrt(users.length * 4));
   return gameState;
 };

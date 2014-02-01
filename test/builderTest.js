@@ -8,6 +8,8 @@ describe('Game Builder', function() {
       var users = [{userId: '1'}, {userId: '2'}, {userId: '3'}, {userId: '4'}];
       var state = builder.build(users);
       state.users.should.have.length(4);
+      state.board.size.should.have.property('width', 4);
+      state.board.size.should.have.property('height', 4);
     });
     
     it('should create 5 stacks per user', function() {
