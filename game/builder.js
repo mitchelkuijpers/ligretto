@@ -49,6 +49,6 @@ exports.build = function (users) {
   });
 
   gameState.board.size.width = Math.ceil(Math.sqrt(users.length * 4));
-  gameState.board.size.height = Math.floor(Math.sqrt(users.length * 4));
+  gameState.board.size.height = Math.ceil(users.length * 4 / gameState.board.size.width);
   return gameState;
 };

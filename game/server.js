@@ -18,7 +18,7 @@ exports.onConnect = function (socket) {
 
   users[userId] = { userId: userId, name: 'User ' + userId};
   sockets[userId] = socket;
-  socket.emit('joined', {userId: userId});
+  socket.emit('joined', users[userId]);
 
   socket.on('gameStart', function() {
     if (gameStarted) {

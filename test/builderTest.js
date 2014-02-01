@@ -11,6 +11,13 @@ describe('Game Builder', function() {
       state.board.size.should.have.property('width', 4);
       state.board.size.should.have.property('height', 4);
     });
+
+    it('should create a correct board size for two players', function() {
+      var users = [{userId: '1'}, {userId: '2'}];
+      var state = builder.build(users);
+      state.board.size.should.have.property('width', 3);
+      state.board.size.should.have.property('height', 3);
+    });
     
     it('should create 5 stacks per user', function() {
       var state = builder.build([{userId: '1'}]);
