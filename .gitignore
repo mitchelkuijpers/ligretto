@@ -13,5 +13,46 @@ results
 
 npm-debug.log
 node_modules
+dist
 
 .idea
+.DS_Store
+### intellij ###
+*.iml
+*.ipr
+*.iws
+.idea/
+
+### textmate ###
+*.tmproj
+*.tmproject
+tmtags
+
+### sublimetext ###
+# SublimeText project files
+*.sublime-workspace
+
+### vim ###
+.*.s[a-w][a-z]
+*.un~
+Session.vim
+.netrwhist
+*~
+
+### node ###
+lib-cov
+*.seed
+*.log
+*.csv
+*.dat
+*.out
+*.pid
+*.gz
+
+pids
+logs
+results
+
+npm-debug.log
+node_modules
+build

@@ -1,7 +1,6 @@
 /**
  * Module dependencies.
  */
-var browserify = require('browserify-middleware');
 var express = require('express');
 var routes = require('./routes');
 var user = require('./routes/user');
@@ -12,8 +11,6 @@ var path = require('path');
 var app = express();
 
 
-browserify.settings('transform', ['reactify']);
-browserify.settings('extensions', ['.js', '.json', '.jspx']);
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
@@ -24,10 +21,8 @@ app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
 app.use(app.router);
-app.use(require('less-middleware')({ src: path.join(__dirname, 'public') }));
-app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/app.js', browserify('./client/app.js'));
+app.use(express.static(__dirname + '/dist'));
 
 // development only
 if ('development' == app.get('env')) {
