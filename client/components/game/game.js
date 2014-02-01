@@ -12,59 +12,55 @@ var _ = require('underscore');
 module.exports = React.createClass({
 
   getInitialState: function() {
-    return {
-        users: {},
-        cards: {},
-        board: {
-            locations: []
-        }
-    };
+    return {game: {
+      users: {},
+      cards: {},
+      board: {
+        locations: []
+      }
+    }};
   },
 
   componentDidMount: function() {
     var that = this;
     this.socket = io.connect("/",  {'force new connection':true} );
     window.test = this.socket;
-    this.socket.on('game', function(data) {
-        that.setState(data);
+    this.socket.on('game', function(initialState) {
+      that.setState({game: initialState});
     });
     this.socket.on('join', function(data) {
-      console.log('JOIN');
-      console.log(data);
     });
     this.socket.on('joined', function(user) {
-      console.log('joined!');
-      console.log(user);
-      that.user = user;
+      that.setState({'userId': user.userId})
     });
     this.socket.on('change', function(newState) {
-      console.log('change');
-      that.setState(newState);
+      that.setState({game: newState});
     });
   },
 
   handleAddCard: function(index, cardId) {
-    this.socket.emit('move', {user: this.user.userId, location: index, card: cardId});
+    this.socket.emit('move', {user: this.state.userId, location: index, card: cardId});
   },
 
   componentWillUnmount: function() {
-      this.socket.disconnect();
-      delete this.socket;
+    this.socket.disconnect();
+    delete this.socket;
   },
 
   render: function() {
-	  var playerNodes = [];
-	  var players = this.state.users;
-	  var cards = this.state.cards;
-	  for (var index in players) {
-		  var player = players[index];
-		  playerNodes.push(<Player key={index} stacks={player.stacks} name={player.name} cards={cards} />);
-	  }
+    var playerNode = <div />;
+    var players = this.state.game.users;
+    var cards = this.state.game.cards;
+
+    if(this.state.userId && _.size(this.state.game.users) > 0) {
+      var player = players[this.state.userId];
+      playerNode = <Player key={this.state.userId + ""} stacks={player.stacks} name={player.name} cards={cards} />;
+    }
     return (
-    	<div id="game">
-			<Board board={this.state.board} cards={this.state.cards} onAddCard={this.handleAddCard} />
-			{playerNodes}
-		</div>
-    );
+      <div id="game">
+        <Board board={this.state.game.board} cards={this.state.game.cards} onAddCard={this.handleAddCard} />
+        {playerNode}
+      </div>
+      );
   }
 });

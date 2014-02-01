@@ -8,12 +8,14 @@ var updateHand = function (gameState, cardId, userId) {
   var user = gameState.users[userId];
 
   var stack = _.find(user.stacks, function (stack) {
-    return stack.length > 0 && stack[0] == cardId
+    return stack.length > 0 && stack[stack.length - 1] == cardId
   });
-  stack.shift();
+  stack.pop();
   var stackIndex = user.stacks.indexOf(stack);
+
+  // shifts card from primary stack to empty stack
   if (stackIndex >= 1 && stackIndex <= 3 && user.stacks[0].length > 0) {
-    user.stacks[stackIndex].push(user.stacks[0].shift());
+    user.stacks[stackIndex].push(user.stacks[0].pop());
   }
 };
 

@@ -40,10 +40,10 @@ exports.onConnect = function (socket) {
         _.each(sockets, function(socket) {socket.emit('change', gameState);});
 
         if (checkGameOver(gameState, message.user)) {
-          socket.broadcast.emit('gameOver', {user: message.user});
+          socket.emit('gameOver', {user: message.user});
         }
       } else {
-        socket.broadcast.emit('rejectMove', message);
+        socket.emit('rejectMove', message);
       }
     });
   });
