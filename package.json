@@ -28,6 +28,7 @@
     "less-loader": "~0.6.2",
     "tiny-lr": "0.0.5",
     "file-loader": "~0.5.1",
-    "url-loader": "~0.5.3"
+    "url-loader": "~0.5.3",
+    "should": "~3.1.2"
   }
 }

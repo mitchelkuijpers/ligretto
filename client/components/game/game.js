@@ -24,9 +24,20 @@ module.exports = React.createClass({
   componentDidMount: function() {
     var that = this;
     this.socket = io.connect("/",  {'force new connection':true} );
+    window.test = this.socket;
     this.socket.on('game', function(data) {
         that.setState(data);
     });
+    this.socket.on('join', function(data) {
+      console.log('JOIN');
+      console.log(data);
+    });
+    this.socket.on('move', function(data) {
+      console.log('MOVE');
+      console.log(data);
+    });
+    
+    
   },
 
   handleAddCard: function(index, cardId) {

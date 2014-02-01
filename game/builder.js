@@ -1,3 +1,5 @@
+var _ = require('underscore');
+
 var createDeck = function (userId) {
   var answer = {};
   var colors = ['yellow', 'green', 'blue', 'red'];
@@ -6,26 +8,25 @@ var createDeck = function (userId) {
       var card = {
         user: userId,
         number: i + 1,
-        color: colors[j]
+        color: colors[j],
+        key: userId + "_" + i + "_" + j
       };
-      var key = userId + "_" + i + "_" + j;
-      answer[key] = card;
+      answer[card.key] = card;
     }
   }
   return answer;
 };
 
 var shuffle = function (o) {
-  for (var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
-  return o;
+  return _.shuffle(_.pluck(o, 'key'));
 };
 
 var createStacks = function (cards) {
   var stacks = [], shuffled = shuffle(cards);
   stacks.push(shuffled.splice(0, 10));
-  stacks.push(shuffled.shift());
-  stacks.push(shuffled.shift());
-  stacks.push(shuffled.shift());
+  stacks.push([shuffled.shift()]);
+  stacks.push([shuffled.shift()]);
+  stacks.push([shuffled.shift()]);
   stacks.push(shuffled);
   return stacks;
 };
@@ -34,7 +35,7 @@ var addUser = function(gameState, user) {
   var userCards = createDeck(user.userId);
   user.stacks = createStacks(userCards);
   _.extend(gameState.cards, userCards);
-  gameState.board.push([], [], [], []);
+  gameState.board.locations.push([], [], [], []);
 };
 
 exports.build = function (users) {
@@ -49,4 +50,5 @@ exports.build = function (users) {
 
   gameState.board.size.width = Math.ceil(Math.sqrt(20));
   gameState.board.size.height = Math.floor(Math.sqrt(20));
+  return gameState;
 };

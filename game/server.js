@@ -1,7 +1,7 @@
 var modify = require('./modify');
 var verify = require('./verify');
 var builder = require('./builder');
-
+var _ = require('underscore');
 var checkGameOver = function (gameState, userId) {
   return gameState.users[userId].stacks[0].length == 0;
 };
@@ -16,7 +16,6 @@ exports.onConnect = function (socket) {
   console.log('User joined: ' + userId);
 
   socket.emit('join', users[userId]);
-
 
   socket.on('gameStart', function() {
     if (gameStarted) {
