@@ -9,13 +9,14 @@ var checkGameOver = function (gameState, userId) {
 var gameStarted = false;
 var users = {
 };
+var sockets = {};
 
 exports.onConnect = function (socket) {
   var userId = ((Math.random()*1000000)+1);
+  
+  _.each(sockets, function(socket) { socket.emit('join', userId)});
   users[userId] = { userId: userId, name: 'User ' + userId};
-  console.log('User joined: ' + userId);
-
-  socket.emit('join', users[userId]);
+  sockets[userId] = socket;
 
   socket.on('gameStart', function() {
     if (gameStarted) {
@@ -24,7 +25,7 @@ exports.onConnect = function (socket) {
 
     var gameState = builder.build(_.extend(users, {}));
 
-    socket.broadcast.emit('game', gameState);
+    _.each(sockets, function(socket){ socket.emit('game', gameState) });
 
     socket.on('move', function (message) {
       console.log('(' + message.uid + ') Received move "' + message.card + '" from "' + message.user + '" to location "' + message.location + '"');
